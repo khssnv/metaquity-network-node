@@ -6,7 +6,7 @@ edition = "2021"
 homepage = "https://metaquity.xyz"
 license = "Unlicense"
 name = "metaquity-network-node"
-repository = "https://github.com/Metaquity-Network/metaquity-network-node-extended"
+repository = "https://github.com/Metaquity-Network/metaquity-network-node"
 version = "0.0.1-dev"
 
 [dependencies]

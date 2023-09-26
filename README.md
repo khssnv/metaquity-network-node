@@ -6,10 +6,10 @@ First, complete the [basic Rust setup instructions](./docs/rust-setup.md).
 
 ### Build
 
-Clone the extended parachain template repository: 
+Clone the metaquity network parachain repository: 
 
 ```sh
-git clone https://github.com/paritytech/extended-parachain-template
+git clone https://github.com/metaquity-network/metaquity-node
 ```
 
 Use the following command to build the node without launching it:

@@ -1,4 +1,4 @@
-//! Substrate Parachain Node Template CLI
+//! Metaquity network CLI
 
 #![warn(missing_docs)]
 
