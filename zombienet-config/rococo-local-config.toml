@@ -1,0 +1,19 @@
+[relaychain]
+chain = "rococo-local"
+default_command = "./bin/polkadot-v1.0.0"
+
+  # relaychain nodes are validators by default
+  [[relaychain.nodes]]
+  name = "alice"
+
+  [[relaychain.nodes]]
+  name = "bob"
+
+[[parachains]]
+id = 666
+addToGenesis = true
+cumulus_based = true
+
+  [parachains.collator]
+  name = "parachain-collator01"
+  command = "./target/release/metaquity-network-node"

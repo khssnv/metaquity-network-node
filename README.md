@@ -1,6 +1,16 @@
-# Metaquity Node
+# Metaquity network
+
+### Rust Setup
+
+First, complete the [basic Rust setup instructions](./docs/rust-setup.md).
 
 ### Build
+
+Clone the extended parachain template repository: 
+
+```sh
+git clone https://github.com/paritytech/extended-parachain-template
+```
 
 Use the following command to build the node without launching it:
 
@@ -8,67 +18,51 @@ Use the following command to build the node without launching it:
 cargo build --release
 ```
 
-### Embedded Docs
+Next you will need a compatible release of [Polkadot](https://github.com/paritytech/polkadot) to run a testnet. You may also want to use [Zombienet (available for Linux and MacOS)](https://github.com/paritytech/zombienet/releases) for spinning up a testnet: 
 
-After you build the project, you can use the following command to explore its parameters and subcommands:
 
+You can find linux and macOS executables of the Zombienet CLI here:
+
+https://github.com/paritytech/zombienet/releases
+Download the Zombienet CLI according to your operating system.
+
+Tip: If you want the executable to be available system-wide then you can follow these steps (otherwise just download the executable to your working directory):
 ```sh
-./target/release/node-template -h
+wget https://github.com/paritytech/zombienet/releases/download/v1.3.30/zombienet-macos
+chmod +x zombienet-macos 
+cp zombienet-macos /usr/local/bin
+```
+Make sure Zombienet CLI is installed correctly:
+```sh
+./zombienet-macos --help
+```
+You should see some similar output:
+```sh
+Usage: zombienet [options] [command]
+
+Options:
+  -c, --spawn-concurrency <concurrency>  Number of concurrent spawning process to launch, default is 1
+  -p, --provider <provider>              Override provider to use (choices: "podman", "kubernetes", "native")
+  -m, --monitor                          Start as monitor, do not auto cleanup network
+  -h, --help                             display help for command
+
+Commands:
+  spawn <networkConfig> [creds]          Spawn the network defined in the config
+  test <testFile> [runningNetworkSpec]   Run tests on the network defined
+  setup <binaries...>                    Setup is meant for downloading and making dev environment of Zombienet ready
+  version                                Prints zombienet version
+  help [command]                         display help for command
+
 ```
 
-You can generate and view the [Rust Docs](https://doc.rust-lang.org/cargo/commands/cargo-doc.html) for this template with this command:
+### Setting up Zombienet config
 
-```sh
-cargo +nightly doc --open
-```
+You may use a reference implementation from the folder `zombienet-config` or make your own. More instructions here: [Simulate parachains in a test network
+](https://docs.substrate.io/test/simulate-parachains/)
 
-### Single-Node Development Chain
-
-The following command starts a single-node development chain that doesn't persist state:
-
-```sh
-./target/release/node-template --dev
-```
-
-To purge the development chain's state, run the following command:
-
-```sh
-./target/release/node-template purge-chain --dev
-```
-
-To start the development chain with detailed logging, run the following command:
-
-```sh
-RUST_BACKTRACE=1 ./target/release/node-template -ldebug --dev
-```
-
-Development chains:
-
-- Maintain state in a `tmp` folder while the node is running.
-- Use the **Alice** and **Bob** accounts as default validator authorities.
-- Use the **Alice** account as the default `sudo` account.
-- Are preconfigured with a genesis state (`/node/src/chain_spec.rs`) that includes several prefunded development accounts.
+👉 Learn more about parachains [here](https://wiki.polkadot.network/docs/learn-parachains), and
+parathreads [here](https://wiki.polkadot.network/docs/learn-parathreads).
 
 
-To persist chain state between runs, specify a base path by running a command similar to the following:
-
-```sh
-// Create a folder to use as the db base path
-$ mkdir my-chain-state
-
-// Use of that folder to store the chain state
-$ ./target/release/node-template --dev --base-path ./my-chain-state/
-
-// Check the folder structure created inside the base path after running the chain
-$ ls ./my-chain-state
-chains
-$ ls ./my-chain-state/chains/
-dev
-$ ls ./my-chain-state/chains/dev
-db keystore network
-```
-
-### Connect with Polkadot-JS Apps Front-End
-
-Similar to other substrate-based nodes, after you start the node locally, you can interact with it using the hosted version of the [Polkadot/Substrate Portal](https://polkadot.js.org/apps/#/explorer?rpc=ws://localhost:9944) front-end by connecting to the local node endpoint.
-
+🧙 Learn about how to use this template and run your own parachain testnet for it in the
+[Devhub Cumulus Tutorial](https://docs.substrate.io/tutorials/v3/cumulus/start-relay/).
